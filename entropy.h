@@ -20,16 +20,23 @@
 typedef union _direction_t_ {
 
   double value;
-  long double dvalue;
+  long double lvalue;
   
 } direction_t;
+
+typedef struct _entropy_vector_ {
+
+  unsigned int length;
+  direction_t direction;
+
+} entropy_vector_t;
 
 /*******************************************************************************
  * API FUNCTION PROTOTYPES
  ***/
 
-extern double entropy_get_entropy(char * string);
-extern direction_t entropy_get_direction(double entropy);
+extern double entropy_get_entropy(char *);
+extern direction_t entropy_get_direction(double);
 
 #endif /* __ET_ENTROPY_H__ */
 
