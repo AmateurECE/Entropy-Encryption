@@ -14,6 +14,8 @@
  * INCLUDES
  ***/
 
+#include <stdio.h>
+
 #include "entropy.h"
 
 /*******************************************************************************
@@ -23,6 +25,8 @@
 int main(int argc, char * argv[])
 {
 
-  return 0;
+  printf("%f\n", 
+	 entropy_get_entropy("The quick brown fox jumped over the lazy dog"));
 
+  return 0;
 }

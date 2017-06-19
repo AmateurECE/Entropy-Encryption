@@ -10,10 +10,10 @@
 # LAST EDITED:	    06/19/2017
 ###
 
-OBJS=entropy.c \
-	entropy_test.c
+
+OBJS = entropy.c entropy_test.c
+CFLAGS = -g -Wall -O0
 LDLIBS=
-CC=c99
 
 entropy: $(OBJS)
 
