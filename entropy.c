@@ -13,6 +13,12 @@
  ***/
 
 /*******************************************************************************
+ * INCLUDES
+ ***/
+
+#include "entropy.h"
+
+/*******************************************************************************
  * API FUNCTIONS
  ***/
 
@@ -29,7 +35,7 @@
  ***/
 double entropy_get_entropy(char * string)
 {
-  return 0F;
+  return 0.0F;
 }
 
 /*******************************************************************************
@@ -47,7 +53,7 @@ double entropy_get_entropy(char * string)
  ***/
 direction_t entropy_get_direction(double entropy)
 {
-  return (direction_t)0F;
+  return (direction_t)0.0L;
 }
 
 /******************************************************************************/
