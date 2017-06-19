@@ -32,6 +32,13 @@ typedef struct _entropy_vector_ {
 } entropy_vector_t;
 
 /*******************************************************************************
+ * STRUCTURE DEFINITIONS
+ ***/
+
+/* Incomplete type used for static function in entropy.c: */
+struct char_count;
+
+/*******************************************************************************
  * API FUNCTION PROTOTYPES
  ***/
 

@@ -19,6 +19,12 @@
 #include "entropy.h"
 
 /*******************************************************************************
+ * LOCAL FUNCTION PROTOTYPES
+ ***/
+
+static int count_char(char *, char_count_t **);
+
+/*******************************************************************************
  * API FUNCTIONS
  ***/
 
@@ -35,6 +41,11 @@
  ***/
 double entropy_get_entropy(char * string)
 {
+  struct char_count {
+    char c;
+    int count;
+  } 
+  
   return 0.0F;
 }
 
