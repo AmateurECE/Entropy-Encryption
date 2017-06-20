@@ -13,7 +13,7 @@
 
 OBJS = entropy.c entropy_test.c
 CFLAGS = -g -Wall -O0
-LDLIBS=
+LDLIBS= -lm
 
 entropy: $(OBJS)
 

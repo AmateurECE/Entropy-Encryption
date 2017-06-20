@@ -30,12 +30,16 @@
 static int count_char(char *, struct char_count **);
 static double entropy_of_char(struct char_count *, int);
 
-struct char_count {
+/*******************************************************************************
+ * GLOBAL VARIABLES
+ ***/
+
+static struct char_count {
   /* Scoped definition of the incomplete type defined
    * in entropy.h. Aren't I sneaky? */
   char c;		
   int count;
-} *pStruct;
+} * pStruct; /* NOTE: This structure is now initialized to NULL. */
 
 /*******************************************************************************
  * API FUNCTIONS
@@ -56,7 +60,7 @@ double entropy_get_entropy(char * string)
 {
   int numchars;
   double entropy = 0.0F;
-  
+
   if (string == NULL || strlen(string) == 0)
     return 0.0F;
 

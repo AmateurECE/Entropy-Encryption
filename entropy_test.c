@@ -27,6 +27,6 @@ int main(int argc, char * argv[])
 
   printf("%f\n", 
 	 entropy_get_entropy("The quick brown fox jumped over the lazy dog"));
-
+  
   return 0;
 }
