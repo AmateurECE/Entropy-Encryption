@@ -112,7 +112,7 @@ static int count_char(char * string, struct char_count ** count)
       if (*c == chars[i])
 	goto _continue;
 
-    chars[++i] = *c;
+    chars[i] = *c;
 
     _continue:
 	c++;
