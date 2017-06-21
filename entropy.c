@@ -35,11 +35,11 @@ static double entropy_of_char(struct char_count *, int);
  ***/
 
 static struct char_count {
-  /* Scoped definition of the incomplete type defined
-   * in entropy.h. Aren't I sneaky? */
+  /* Incomplete type defined in entropy.h.
+   * Aren't I sneaky? */
   char c;		
   int count;
-} * pStruct; /* NOTE: This structure is now initialized to NULL. */
+} * pStruct = NULL; /* NOTE: This structure is now initialized to NULL. */
 
 /*******************************************************************************
  * API FUNCTIONS
@@ -98,38 +98,52 @@ direction_t entropy_get_direction(double entropy)
  * LOCAL FUNCTIONS
  ***/
 
+/*******************************************************************************
+ * FUNCTION:	    count_char
+ *
+ * DESCRIPTION:	    Static function that gets the scope of the string (An array
+ *		    containing one copy of each of the letters found in the
+ *		    string) and a count of how many times each letter appears.
+ *
+ * ARGUMENTS:	    string: (char *) -- the string in question.
+ *		    count: (struct char_count **) -- array of char_count objects
+ *			is placed here after function call.
+ *
+ * RETURN:	    int -- 0 on success, -1 otherwise.
+ *
+ * NOTES:	    This function has static linkage.
+ ***/
 static int count_char(char * string, struct char_count ** count)
 {
 
-  char chars[strlen(string)];
+  char scope[strlen(string)];
   char * c = string;
 
   /* Create an array with the scope of the characters in the string. */
   while (*c != '\0') {
 
     int i;
-    for (i = 0; i < strlen(chars); i++)
-      if (*c == chars[i])
+    for (i = 0; i < strlen(scope); i++)
+      if (*c == scope[i])
 	goto _continue;
 
-    chars[i] = *c;
+    scope[strlen(scope)] = *c;
 
     _continue:
 	c++;
     }
   /* ...Done. */
 
-  *count = (struct char_count *)calloc(strlen(chars) - 1,
+  *count = (struct char_count *)calloc(strlen(scope),
 				       sizeof(struct char_count));
 
-  for (int i = 0; i < strlen(chars) - 1; i++) {
-    /* We use strlen(chars) - 1 because we don't care about '\0.' */
+  for (int i = 0; i < strlen(scope); i++) {
 
-    (*count)[i].c = chars[i];
+    (*count)[i].c = scope[i];
     (*count)[i].count = 0;
 
-    for (int j = 0; j < strlen(chars); j++)
-      if (chars[j] == (*count)[i].c)
+    for (int j = 0; j < strlen(scope); j++)
+      if (scope[j] == (*count)[i].c)
 	(*count)[i].count++;
 
   }
@@ -137,14 +151,28 @@ static int count_char(char * string, struct char_count ** count)
   return 0;
 }
 
-static double entropy_of_char(struct char_count * victim, int len_of_str)
+/*******************************************************************************
+ * FUNCTION:	    entropy_of_char
+ *
+ * DESCRIPTION:	    Returns the entropy of all instances of a given character
+ *		    in a string.
+ *
+ * ARGUMENTS:	    scope: (struct char_count *) -- char_count object containing
+ *			the char and number of times it appears.
+ *		    len_of_str: (int) -- the length of the string up to, but not
+ *			including, the null character.
+ *
+ * RETURN:	    double -- the entropy of all instances of the character in
+ *			the string.
+ *
+ * NOTES:	    This function has static linkage.
+ ***/
+static double entropy_of_char(struct char_count * scope, int len_of_str)
 {
   double ret = 0.0F;
-  double buff = 0.0F;
 
-  buff = (double)(victim->count / len_of_str);
-  ret = log2(buff);
-  ret *= -1.0 * victim->count;
+  ret = log2((scope->count / (len_of_str + 0.0)));
+  ret *= -1.0 * scope->count;
   return ret;
 }
 

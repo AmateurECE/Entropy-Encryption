@@ -15,8 +15,15 @@
  ***/
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "entropy.h"
+
+/*******************************************************************************
+ * STATIC FUNCTION PROTOTYPES
+ ***/
+
+static inline _Noreturn void error_exit(char * msg);
 
 /*******************************************************************************
  * MAIN
@@ -25,8 +32,24 @@
 int main(int argc, char * argv[])
 {
 
-  printf("%f\n", 
-	 entropy_get_entropy("The quick brown fox jumped over the lazy dog"));
+  if (argc < 2)
+    error_exit("Not enough arguments!");
+
+  printf("Entropy of String \"%s\":\n%f\n",
+	 argv[1],
+	 entropy_get_entropy(argv[1]));
   
   return 0;
 }
+
+/*******************************************************************************
+ * STATIC FUNTIONS
+ ***/
+
+static inline _Noreturn void error_exit(char * msg)
+{
+  fprintf(stderr, "%s\n", msg);
+  exit(1);
+}
+
+/******************************************************************************/
